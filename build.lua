@@ -91,8 +91,8 @@ if config.IncludeMetadata then
         "String",
         [[
             return {
-                Branch = "]] .. branchName .. [[",
-                Commit = "]] .. commitSHA .. [[",
+                Branch = "]] .. config.Branch .. [[",
+                Commit = "]] .. config.Commit .. [[",
             }
         ]]
     )
