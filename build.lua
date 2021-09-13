@@ -10,7 +10,7 @@ end
 
 printDir(".")
 
-print(io.popen("cd"):read("*l"))
+print(io.popen("pwd"):read("*l"))
 
 print("TEST", remodel.isFile("Forge/config.lua"))
 
