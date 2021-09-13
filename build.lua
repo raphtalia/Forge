@@ -1,4 +1,8 @@
-local config = require("./Forge/config.lua")
+for _,path in ipairs(remodel.readDir(".")) do
+    print(path)
+end
+
+local config = require("config")
 
 local dataModels = {}
 
