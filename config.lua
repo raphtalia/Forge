@@ -15,12 +15,6 @@ do
         assetId = config.target
     elseif targetType == "table" then
         assetId = config.target[branchName]
-
-        if not assetId then
-            -- This branch has no specified target, skip rest of script
-            print(("No target specified for branch %s, skipping"):format(branchName))
-            return
-        end
     else
         error("Invalid targetType: ".. targetType)
     end
