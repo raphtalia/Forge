@@ -1,4 +1,4 @@
-local config = require("Forge/config.lua")
+local config = require("./Forge/config.lua")
 
 local dataModels = {}
 
