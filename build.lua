@@ -1,3 +1,5 @@
+print(({...})[0])
+
 local config = require("config")
 
 local dataModels = {}
