@@ -5,14 +5,12 @@ if not success then
     error("Could not read deployment.json: " .. config)
 end
 
-print("config", json.toString(config))
-
 local branchName = io.popen("git rev-parse --abbrev-ref HEAD"):read("*l")
 local commitSHA = io.popen("git rev-parse HEAD"):read("*l")
 local assetId
 local dataModels = {}
 
-local targetType = type(config.targetType)
+local targetType = type(config.target)
 if targetType == "string" then
     assetId = config.target
 elseif targetType == "table" then
