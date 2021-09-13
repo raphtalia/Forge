@@ -10,7 +10,12 @@ end
 
 printDir(".")
 
+print("CWD")
 print(io.popen("pwd"):read("*l"))
+print("LS")
+print(io.popen("ls"):read("*all"))
+print("LS ..")
+print(io.popen("ls .. "):read("*all"))
 
 print("TEST", remodel.isFile("Forge/config.lua"))
 
