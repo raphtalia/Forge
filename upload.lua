@@ -1,7 +1,8 @@
 local config = load(remodel.readFile("Forge/config.lua"))()
+local assetId = config.AssetId
 
-for i,v in pairs(config) do
-    print(i,v)
+if not assetId then
+    error("Could not find asset ID for branch ".. config.Branch)
 end
 
 -- Publish the DataModel to Roblox
@@ -11,4 +12,4 @@ if not dataModel then
     error("Expected a place file path as first argument")
 end
 
-remodel.writeExistingPlaceAsset(dataModel, config.AssetId)
+remodel.writeExistingPlaceAsset(dataModel, assetId)
