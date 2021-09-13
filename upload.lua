@@ -1,4 +1,4 @@
-local config = require("config")
+local config = load(remodel.readFile("Forge/config.lua"))()
 
 -- Publish the DataModel to Roblox
 local placeFilePath = remodel.readPlaceFile({...})[1]
