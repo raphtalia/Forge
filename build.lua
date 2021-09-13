@@ -1,33 +1,10 @@
-local success, config = pcall(function()
-    return json.fromString(remodel.readFile("deployment.json"))
-end)
-if not success then
-    error("Could not read deployment.json: " .. config)
-end
+local config = load(remodel.readFile("Forge/config.lua"))()
 
-local branchName = io.popen("git rev-parse --abbrev-ref HEAD"):read("*l")
-local commitSHA = io.popen("git rev-parse HEAD"):read("*l")
-local assetId
 local dataModels = {}
 
-local targetType = type(config.target)
-if targetType == "string" then
-    assetId = config.target
-elseif targetType == "table" then
-    assetId = config.target[branchName]
-
-    if not assetId then
-        -- This branch has no specified target, skip rest of script
-        print(("No target specified for branch %s, skipping"):format(branchName))
-        return
-    end
-else
-    error("Invalid targetType: ".. targetType)
-end
-
-if #config.files > 0 then
+if #config.Paths > 0 then
     -- Read the place files into DataModels
-    for i, fileParams in ipairs(config.files) do
+    for i, fileParams in ipairs(config.Paths) do
         local path = fileParams.path
         local fileExt = path:sub(-5)
 
@@ -102,7 +79,7 @@ end
 
 local dataModel = dataModels[1]
 
-if config.includeMetadata then
+if config.IncludeMetadata then
     print("Adding metadata")
 
     -- Add commit metadata to the DataModel
@@ -122,5 +99,4 @@ if config.includeMetadata then
     metadata.Parent = dataModel:GetService("ReplicatedStorage")
 end
 
--- Publish the DataModel to Roblox
-remodel.writeExistingPlaceAsset(dataModel, assetId)
+remodel.writePlaceFile(dataModel, ({...})[1] or "output.rbxl")
