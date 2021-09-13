@@ -12,7 +12,7 @@ printDir(".")
 
 print("TEST", remodel.isFile("Forge/config.lua"))
 
-local config = require("Forge/config.lua")
+local config = require("./Forge/config.lua")
 
 local dataModels = {}
 
