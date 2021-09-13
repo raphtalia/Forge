@@ -2,7 +2,7 @@ local function printDir(path)
     for _,v in ipairs(remodel.readDir(path)) do
         print(v)
         if remodel.isDir(v) then
-            printDir(v)
+            printDir(path.. "/".. v)
         end
     end
 end
