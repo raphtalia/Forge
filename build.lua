@@ -1,6 +1,4 @@
-print(require("lfs"))
-
-local config = require("config")
+local config = require("config.lua")
 
 local dataModels = {}
 
