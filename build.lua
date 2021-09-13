@@ -1,4 +1,4 @@
-local config = loadstring(remodel.readFile("Forge/config.lua"))()
+local config = load(remodel.readFile("Forge/config.lua"))()
 
 local dataModels = {}
 
