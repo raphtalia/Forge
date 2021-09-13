@@ -15,6 +15,10 @@ do
         assetId = config.target
     elseif targetType == "table" then
         assetId = config.target[branchName]
+
+        if not assetId then
+            error("Could not find asset ID for branch ".. branchName)
+        end
     else
         error("Invalid targetType: ".. targetType)
     end
