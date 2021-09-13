@@ -1,25 +1,4 @@
-local function printDir(path)
-    for _,v in ipairs(remodel.readDir(path)) do
-        v = path.. "/".. v
-        print(v)
-        if remodel.isDir(v) then
-            printDir(v)
-        end
-    end
-end
-
-printDir(".")
-
-print("CWD")
-print(io.popen("pwd"):read("*l"))
-print("LS")
-print(io.popen("ls"):read("*all"))
-print("LS ..")
-print(io.popen("ls .. "):read("*all"))
-
-print("TEST", remodel.isFile("Forge/config.lua"))
-
-local config = require("./Forge/config.lua")
+local config = loadstring(remodel.readFile("Forge/config.lua"))()
 
 local dataModels = {}
 
