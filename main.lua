@@ -10,7 +10,7 @@ local commitSHA = io.popen("git rev-parse HEAD"):read("*l")
 local assetId
 local dataModels = {}
 
-local targetType = config.targetType
+local targetType = type(config.target)
 if targetType == "string" then
     assetId = config.target
 elseif targetType == "table" then
@@ -18,10 +18,11 @@ elseif targetType == "table" then
 
     if not assetId then
         -- This branch has no specified target, skip rest of script
+        print(("No target specified for branch %s, skipping"):format(branchName))
         return
     end
 else
-    error("Invalid targetType: " .. targetType)
+    error("Invalid targetType: ".. targetType)
 end
 
 if #config.files > 0 then
@@ -102,6 +103,8 @@ end
 local dataModel = dataModels[1]
 
 if config.includeMetadata then
+    print("Adding metadata")
+
     -- Add commit metadata to the DataModel
     local metadata = Instance.new("ModuleScript")
     metadata.Name = "_GithubMetadata"
