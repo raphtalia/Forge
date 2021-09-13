@@ -36,6 +36,6 @@ return {
     Branch = branchName,
     Commit = commitSHA,
     AssetId = assetId,
-    IncludeMetaData = config.IncludeMetaData,
+    IncludeMetaData = config.includeMetaData,
     Paths = config.files,
 }
