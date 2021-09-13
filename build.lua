@@ -1,4 +1,4 @@
-print(({...})[0])
+print(require("lfs"))
 
 local config = require("config")
 
