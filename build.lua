@@ -6,13 +6,16 @@ if #config.Paths > 0 then
     -- Read the place files into DataModels
     for i, fileParams in ipairs(config.Paths) do
         local path = fileParams.path
-        local fileExt = path:sub(-5)
 
-        if remodel.isFile(path) and fileExt == ".rbxl" or fileExt == ".rbxm" then
+        if remodel.isFile(path) and (path:sub(-5) == ".rbxl" or path:sub(-6) == ".rbxlx") then
+            -- Path is to a place file
             table.insert(dataModels, remodel.readPlaceFile(path))
-        elseif remodel.isDir(path) then
+        elseif remodel.isDir(path) or (remodel.isFile(path) and path:sub(-13) == ".project.json") then
+            -- Path is to a directory or a Rojo project file
             local outputPath = i.. ".rbxl"
+
             os.execute(("rojo build --output %s %s"):format(outputPath, path))
+
             table.insert(dataModels, remodel.readPlaceFile(outputPath))
         end
 
