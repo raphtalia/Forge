@@ -10,6 +10,8 @@ end
 
 printDir(".")
 
+print(io.popen("cd"):read("*l"))
+
 print("TEST", remodel.isFile("Forge/config.lua"))
 
 local config = require("./Forge/config.lua")
