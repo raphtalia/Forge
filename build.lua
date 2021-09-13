@@ -1,6 +1,13 @@
-for _,path in ipairs(remodel.readDir(".")) do
-    print(path)
+local function printDir(path)
+    for _,v in ipairs(remodel.readDir(path)) do
+        print(v)
+        if remodel.isDir(v) then
+            printDir(v)
+        end
+    end
 end
+
+printDir(".")
 
 local config = require("config")
 
