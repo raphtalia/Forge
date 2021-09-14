@@ -5,11 +5,17 @@ if not assetId then
     error("Could not find asset ID for branch ".. config.Branch)
 end
 
--- Publish the DataModel to Roblox
-local dataModel = remodel.readPlaceFile(({...})[1])
+local args = {...}
 
-if not dataModel then
+-- Publish the DataModel to Roblox
+local placeFilePath = remodel.readPlaceFile(args[1])
+if not placeFilePath then
     error("Expected a place file path as first argument")
 end
 
-remodel.writeExistingPlaceAsset(dataModel, assetId)
+local assetId = args[2] or config.AssetId
+if not assetId then
+    error("Expected an asset id as second argument or in deployment config")
+end
+
+remodel.writeExistingPlaceAsset(placeFilePath, assetId)

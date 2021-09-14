@@ -19,7 +19,7 @@ do
         if not assetId then
             error("Could not find asset ID for branch ".. branchName)
         end
-    else
+    elseif targetType ~= "nil" then
         error("Invalid targetType: ".. targetType)
     end
 end
