@@ -7,16 +7,21 @@ if #config.Paths > 0 then
     for i, fileParams in ipairs(config.Paths) do
         local path = fileParams.path
 
-        if remodel.isFile(path) and (path:sub(-5) == ".rbxl" or path:sub(-6) == ".rbxlx") then
-            -- Path is to a place file
-            table.insert(dataModels, remodel.readPlaceFile(path))
-        elseif remodel.isDir(path) or (remodel.isFile(path) and path:sub(-13) == ".project.json") then
-            -- Path is to a directory or a Rojo project file
-            local outputPath = i.. ".rbxl"
+        if path:sub(1, 4) == "rbx/" then
+            -- Path is to a published place asset
+            table.insert(dataModels, remodel.readPlaceAsset(path:sub(5)))
+        else
+            if remodel.isFile(path) and (path:sub(-5) == ".rbxl" or path:sub(-6) == ".rbxlx") then
+                -- Path is to a place file
+                table.insert(dataModels, remodel.readPlaceFile(path))
+            elseif remodel.isDir(path) or (remodel.isFile(path) and path:sub(-13) == ".project.json") then
+                -- Path is to a directory or a Rojo project file
+                local outputPath = i.. ".rbxl"
 
-            os.execute(("rojo build --output %s %s"):format(outputPath, path))
+                os.execute(("rojo build --output %s %s"):format(outputPath, path))
 
-            table.insert(dataModels, remodel.readPlaceFile(outputPath))
+                table.insert(dataModels, remodel.readPlaceFile(outputPath))
+            end
         end
 
         --[[
